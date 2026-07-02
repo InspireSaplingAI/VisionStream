@@ -1,0 +1,70 @@
+# =============================================================
+# VisionStream Docker Compose
+# =============================================================
+# Orchestrates three services:
+#   api   — FastAPI application     (localhost:8000)
+#   db    — PostgreSQL 16 database  (localhost:5432)
+#   cache — Redis 7                 (localhost:6379)
+#
+# 📌 Lesson 5 Task:
+#   Uncomment and complete each service definition below.
+#
+#   'api' service:
+#     - build: . (use Dockerfile in project root)
+#     - ports: "8000:8000"
+#     - environment: DATABASE_URL, REDIS_URL, API_KEY
+#     - depends_on: [db, cache]
+#     - Restart policy: unless-stopped
+#
+#   'db' service:
+#     - image: postgres:16-alpine
+#     - environment: POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
+#     - volumes: postgres_data + mount db/schema.sql to initdb.d
+#
+#   'cache' service:
+#     - image: redis:7-alpine
+#     - ports: "6379:6379"
+#
+#   Start everything:
+#     docker-compose up --build
+# =============================================================
+
+version: "3.9"
+
+services:
+  # TODO (Lesson 5): Define the 'api' service
+  # api:
+  #   build: .
+  #   ports:
+  #     - "8000:8000"
+  #   environment:
+  #     - DATABASE_URL=postgresql://visionstream:changeme@db:5432/visionstream
+  #     - REDIS_URL=redis://cache:6379/0
+  #     - API_KEY=changeme-dev-key
+  #   depends_on:
+  #     - db
+  #     - cache
+  #   restart: unless-stopped
+
+  # TODO (Lesson 5): Define the 'db' service
+  # db:
+  #   image: postgres:16-alpine
+  #   environment:
+  #     POSTGRES_USER: visionstream
+  #     POSTGRES_PASSWORD: changeme
+  #     POSTGRES_DB: visionstream
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #     - ./db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+  #   ports:
+  #     - "5432:5432"
+
+  # TODO (Lesson 5): Define the 'cache' service
+  # cache:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+
+  # TODO (Lesson 5): Define the named volume for PostgreSQL data persistence
+  # volumes:
+  #   postgres_data:
